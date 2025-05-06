@@ -1,0 +1,55 @@
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-container-wrapper{
+    display: flex;
+    gap: 5rem;
+}
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.login-form-email-wrapper, .login-form-password-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.login-form-button-sign-in{
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #1e90ff;
+    color: white;
+    margin-bottom: 10px
+}
+.login-form-button{
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid grey;
+    background-color: white;
+}
+
+.img-google{
+    width: 20px;
+    margin-right: 10px;
+}
+
+.login-failed{
+    color: red;
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .login-container-wrapper{
+        display: flex;
+        flex-direction: column;
+        flex-direction: column-reverse;
+        width: 90%;
+    }
+}

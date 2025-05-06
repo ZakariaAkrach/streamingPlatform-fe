@@ -1,0 +1,31 @@
+.register-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+}
+.registration-form-container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.register-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.register-form-input-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.register-form-button-sign-up{
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #1e90ff;
+    color: white;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}

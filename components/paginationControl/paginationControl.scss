@@ -1,0 +1,21 @@
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.pagination-control-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.pagination-control-number-clicked {
+    background-color: #1e90ff;
+    color: white;
+}

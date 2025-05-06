@@ -1,0 +1,35 @@
+.error-page-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.error-page-text-title{
+    font-size: 8rem;
+    color: #1e90ff;
+}
+.error-page-text-apologize{
+    font-size: 2rem;
+    text-align: center;
+}
+.error-page-text{
+    text-align: center;
+}
+.error-page-container > a{
+    list-style: none;
+    border: none;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+.error-page-back-to-home{
+    background-color: #1e90ff;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    padding: 5px 13px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}

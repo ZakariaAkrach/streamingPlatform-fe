@@ -1,0 +1,93 @@
+.modal-filter {
+  background-color: #f8f9fa;
+  border: 2px solid #5a5a5a;
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 95%;
+  overflow-y: auto;
+  padding: 20px;
+}
+.modal-filter-hide {
+  display: none;
+}
+.modal-filter-show {
+  display: block;
+}
+.modal-filter-separator {
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+.modal-filter-type-quality {
+  display: flex;
+  gap: 30%;
+}
+.modal-filter-type > ul {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+.modal-filter-quality > ul {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+.modal-filter-released > ul {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+.modal-filter-genres-checkbox > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+.modal-filter-country-checkbox > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+.modal-filter-button-filter {
+  margin-right: 20px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 50px;
+  background-color: #1e90ff;
+  color: white;
+}
+.modal-filter-button-close {
+  margin-right: 20px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 50px;
+  background-color: #404757;
+  color: white;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .modal-filter {
+    width: 80%;
+  }
+  .modal-filter-type-quality {
+    flex-direction: column;
+  }
+  .modal-filter-released > ul {
+    flex-wrap: wrap;
+  }
+}

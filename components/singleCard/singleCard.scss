@@ -1,0 +1,31 @@
+.home-view-single-card > img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+.home-view-single-title-card {
+  font-size: 1.3rem;
+}
+.home-view-card-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #404747;
+  padding: 5px;
+  margin: 20px 10px 0 10px;
+  border-radius: 10px;
+}
+.home-view-card-button:hover{
+  opacity: 0.9;
+}
+.fa-play {
+  color: white;
+}
+.fa-play:hover{
+  cursor: pointer;
+}
+.home-view-card-button > button {
+  border: none;
+  background-color: #404747;
+  color: white;
+}

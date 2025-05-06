@@ -1,0 +1,34 @@
+.pagination-title-and-filter {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 90%;
+  margin: 30px auto 30px auto;
+}
+.fa-filter {
+  font-size: 2rem;
+}
+.fa-filter:hover {
+  color: #1e90ff;
+  cursor: pointer;
+}
+.pagination-views-movies {
+  width: 90%;
+  margin: 30px auto 30px auto;
+}
+.pagination-view-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .pagination-title {
+    font-size: 2rem;
+  }
+  .pagination-view-cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  }
+}

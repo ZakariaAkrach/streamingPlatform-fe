@@ -1,0 +1,19 @@
+.rate > ul {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+.fa-star {
+  color: #1e90ff;
+  margin-right: 3px;
+}
+
+@media (max-width: 768px) {
+  .rate > ul {
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+  }
+}

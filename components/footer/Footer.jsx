@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import "./footer.scss";
+import foto_zakaria from "../../src/images/foto_zakaria.png"
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-logo">
-          <img src="../../src/images/foto_zakaria.png" />
+          <img src={foto_zakaria} alt="foto zakaria" />
           <div className="info-footer-logo">
             <h3>Zakaria Akrach</h3>
             <p>Software Developer</p>

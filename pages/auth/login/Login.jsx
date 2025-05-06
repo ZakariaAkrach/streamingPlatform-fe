@@ -2,6 +2,7 @@ import "./login.scss";
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../../api/axiosConfig";
+import photo_google from "../../../src/images/google.png"
 
 export default function Login() {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ export default function Login() {
             <button className="login-form-button" onClick={loginGoogle}>
               <img
                 className="img-google"
-                src="../../../src/images/google.png"
+                src={photo_google}
                 alt="google"
               />
               Sign in with Google

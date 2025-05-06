@@ -1,19 +1,20 @@
 import Rate from "../rate/Rate";
 import "./slider.scss";
+import daredevil from "../../src/images/daredevil-born-again.jpg"
 
 export default function Slider() {
   return (
     <section className="home-slider">
       <img
         className="home-background-slider"
-        src="../../src/images/daredevil-born-again.jpg"
+        src={daredevil}
         alt="slider-photo"
       />
 
       <div className="home-information-slider">
         <div className="home-wrapper-information-photo-icon-play">
           <img
-            src="../../src/images/daredevil-born-again.jpg"
+            src={daredevil}
             alt="slider-photo"
           />
           <i className="fa-solid fa-circle-play"></i>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./header.scss";
 import api from "../../api/axiosConfig";
+import movie_logo from "../../public/movie.svg"
 
 export default function Header() {
   const [isLogged, setIsLogged] = useState(false);
@@ -38,7 +39,7 @@ export default function Header() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light nav-container">
       <Link to="." className="navbar-brand">
         {" "}
-        <img className="logo" src="../../public/movie.svg" alt="logo" />
+        <img className="logo" src={movie_logo} alt="logo" />
       </Link>
       <button
       

@@ -1,36 +1,52 @@
 import "./login.scss";
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import api from "../../../api/axiosConfig";
-import photo_google from "../../../src/images/google.png"
+import photo_google from "../../../src/images/google.png";
+import { LoginContext } from "../../../context/LoginContext";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [loginFailed, setLoginFailed] = useState(false)
+  const [loginFailed, setLoginFailed] = useState(false);
+  const [loginOauth2Failed, setLoginOauth2Failed] = useState(false);
+  const { setIsLogged } = useContext(LoginContext);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const errorOauth2 = queryParams.get("errorOauth2");
+
+  useEffect(() => {
+    if (errorOauth2 === null) {
+      setLoginOauth2Failed(false);
+    } else {
+      setLoginOauth2Failed(true)
+    }
+  }, [errorOauth2]);
 
   function loginForm(formData) {
-    const email = formData.get("email")
-    const password = formData.get("password")
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    localStorage.removeItem("token")
-    api.post('/auth/login', {
-      email: email,
-      password: password
-    },)
-      .then(res => {
-        if(res.data.token !== null){
-          setLoginFailed(false)
-          localStorage.setItem("token", res.data.token)
-          navigate("/user-dasheboard")
-        } else {
-          setLoginFailed(true)
-        }
+    localStorage.removeItem("token");
+    api
+      .post("/auth/login", {
+        email: email,
+        password: password,
       })
+      .then((res) => {
+        if (res.data.token !== null) {
+          setLoginFailed(false);
+          localStorage.setItem("token", res.data.token);
+          setIsLogged(true);
+          navigate("/user-dasheboard");
+        } else {
+          setLoginFailed(true);
+        }
+      });
   }
 
-
-  function loginGoogle(){
-    localStorage.removeItem("token")
+  function loginGoogle() {
+    localStorage.removeItem("token");
     window.location.href = "http://localhost:8080/oauth2/authorization/google";
   }
 
@@ -41,7 +57,15 @@ export default function Login() {
           <h1>Welcome back</h1>
           <p>Please enter your details</p>
 
-          {loginFailed ? <p className="login-failed">Invalid credentials. Please try again.</p> : null}
+          {loginFailed ? (
+            <p className="login-failed">
+              Invalid credentials. Please try again.
+            </p>
+          ) : null}
+
+          {loginOauth2Failed ? (
+            <p className="login-oauth2-failed">{errorOauth2}</p>
+          ) : null}
 
           <form className="login-form" action={loginForm}>
             <div className="login-form-email-wrapper">
@@ -74,11 +98,7 @@ export default function Login() {
             <button className="login-form-button-sign-in">Sign in</button>
 
             <button className="login-form-button" onClick={loginGoogle}>
-              <img
-                className="img-google"
-                src={photo_google}
-                alt="google"
-              />
+              <img className="img-google" src={photo_google} alt="google" />
               Sign in with Google
             </button>
           </form>

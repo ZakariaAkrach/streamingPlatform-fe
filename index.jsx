@@ -13,7 +13,10 @@ import ErrorPage from "./pages/errorPage/ErrorPage";
 import HandleGenericError from "./components/handleGenericError/HandleGenericError";
 import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
-import UserDasheboard from "./pages/dasheboards/user/UserDasheboard";
+import UserDashboard from "./pages/dashboard/user/UserDashboard";
+import LoginProvider from "./context/LoginProvider";
+import ProtectedRoute from "./protected/ProtectedRoute";
+import OAuth2RedirectHandler from "./components/ouath2Redirect/OAuth2RedirectHandler";
 
 const root = createRoot(document.getElementById("root"));
 
@@ -28,10 +31,26 @@ const router = createBrowserRouter(
       <Route path="tv-show" element={<Pagination />} />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="user-dasheboard" element={<UserDasheboard />} />
+      <Route
+        path="oauth2-redirect-handler"
+        element={<OAuth2RedirectHandler />}
+      />
+
+      <Route
+        path="user-dasheboard"
+        element={
+          <ProtectedRoute>
+            <UserDashboard />
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )
 );
 
-root.render(<RouterProvider router={router} />);
+root.render(
+  <LoginProvider>
+    <RouterProvider router={router} />
+  </LoginProvider>
+);

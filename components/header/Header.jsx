@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./header.scss";
 import api from "../../api/axiosConfig";
-import movie_logo from "../../public/movie.svg"
+import movie_logo from "../../public/movie.svg";
+import { LoginContext } from "../../context/LoginContext";
 
 export default function Header() {
-  const [isLogged, setIsLogged] = useState(false);
+  const { isLogged, setIsLogged } = useContext(LoginContext);
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     api
@@ -25,10 +26,10 @@ export default function Header() {
   }, [location.pathname]);
 
   function handleLogOut() {
-    api.post("http://localhost:8080/logout")
-    localStorage.removeItem('token');
+    api.post("http://localhost:8080/logout");
+    localStorage.removeItem("token");
     setIsLogged(false);
-    navigate("/login")
+    navigate("/login");
   }
 
   const buttonLoginStyle = {
@@ -42,7 +43,6 @@ export default function Header() {
         <img className="logo" src={movie_logo} alt="logo" />
       </Link>
       <button
-      
         className="navbar-toggler"
         type="button"
         data-toggle="collapse"

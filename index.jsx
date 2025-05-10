@@ -17,6 +17,7 @@ import UserDashboard from "./pages/dashboard/user/UserDashboard";
 import LoginProvider from "./context/LoginProvider";
 import ProtectedRoute from "./protected/ProtectedRoute";
 import OAuth2RedirectHandler from "./components/ouath2Redirect/OAuth2RedirectHandler";
+import ContentManager from "./pages/dashboard/contentManager/ContentManager";
 
 const root = createRoot(document.getElementById("root"));
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
         path="oauth2-redirect-handler"
         element={<OAuth2RedirectHandler />}
       />
+      <Route path="content-manager" element={<ContentManager />} />
 
       <Route
         path="user-dasheboard"

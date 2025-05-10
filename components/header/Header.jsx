@@ -1,5 +1,5 @@
-import { useEffect, useState, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./header.scss";
 import api from "../../api/axiosConfig";
 import movie_logo from "../../public/movie.svg";
@@ -7,23 +7,7 @@ import { LoginContext } from "../../context/LoginContext";
 
 export default function Header() {
   const { isLogged, setIsLogged } = useContext(LoginContext);
-  const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    api
-      .get("/token/test")
-      .then((res) => {
-        if (res.status === 200) {
-          setIsLogged(true);
-        }
-      })
-      .catch((error) => {
-        if (error.status === 401) {
-          setIsLogged(false);
-        }
-      });
-  }, [location.pathname]);
 
   function handleLogOut() {
     api.post("http://localhost:8080/logout");
@@ -67,7 +51,7 @@ export default function Header() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="tv-show">
+            <Link className="nav-link" to="content-manager">
               Archive
             </Link>
           </li>

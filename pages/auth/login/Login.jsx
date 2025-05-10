@@ -8,6 +8,7 @@ import { LoginContext } from "../../../context/LoginContext";
 export default function Login() {
   const navigate = useNavigate();
   const [loginFailed, setLoginFailed] = useState(false);
+  const [responseLogin, setResponseLogin] = useState("");
   const [loginOauth2Failed, setLoginOauth2Failed] = useState(false);
   const { setIsLogged } = useContext(LoginContext);
 
@@ -19,7 +20,7 @@ export default function Login() {
     if (errorOauth2 === null) {
       setLoginOauth2Failed(false);
     } else {
-      setLoginOauth2Failed(true)
+      setLoginOauth2Failed(true);
     }
   }, [errorOauth2]);
 
@@ -38,17 +39,20 @@ export default function Login() {
           setLoginFailed(false);
           localStorage.setItem("token", res.data.token);
           setIsLogged(true);
+          setResponseLogin(res.data.message);
           navigate("/user-dasheboard");
         } else {
           setLoginFailed(true);
+          setResponseLogin(res.data.message);
+          console.log(res.data);
         }
       });
   }
 
   function loginGoogle() {
     localStorage.removeItem("token");
-    //window.location.href = "http://localhost:8080/oauth2/authorization/google";
-    window.location.href = "https://streamingplatform-be.onrender.com/oauth2/authorization/google"
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    //window.location.href = "https://streamingplatform-be.onrender.com/oauth2/authorization/google"
   }
 
   return (
@@ -58,11 +62,7 @@ export default function Login() {
           <h1>Welcome back</h1>
           <p>Please enter your details</p>
 
-          {loginFailed ? (
-            <p className="login-failed">
-              Invalid credentials. Please try again.
-            </p>
-          ) : null}
+          {loginFailed ? <p className="login-failed">{responseLogin}</p> : null}
 
           {loginOauth2Failed ? (
             <p className="login-oauth2-failed">{errorOauth2}</p>

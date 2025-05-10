@@ -1,12 +1,20 @@
-import { useState, createContext } from "react";
+import { useState } from "react";
 import { LoginContext } from "./LoginContext";
 
-export default function LoginProvider({children}) {
-     const [isLogged, setIsLogged] = useState(false);
+export default function LoginProvider({ children }) {
+  const [isLogged, setIsLogged] = useState(isLoggedCheck);
 
-    return(
-        <LoginContext.Provider value={{isLogged, setIsLogged}}>
-            {children}
-        </LoginContext.Provider>
-    )
+  function isLoggedCheck() {
+    const token = localStorage.getItem("token");
+    if (token !== null) {
+      return true;
+    }
+    return false;
+  }
+
+  return (
+    <LoginContext.Provider value={{ isLogged, setIsLogged }}>
+      {children}
+    </LoginContext.Provider>
+  );
 }

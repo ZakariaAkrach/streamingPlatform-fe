@@ -91,7 +91,7 @@ export default function Register() {
                 aria-label="password input"
                 autoComplete="current-password"
                 required={true}
-                minLength={8}
+                minLength={3}
               />
             </div>
 

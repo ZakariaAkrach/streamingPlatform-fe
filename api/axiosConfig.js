@@ -20,19 +20,20 @@ export const getAuthToken = () => {
 export const refreshToken = async () => {
   const token = getAuthToken();
   if (!token) {
+    console.warn("No auth token found. Skipping refresh.");
     return null;
   }
 
   try {
-    api.get("/token/refresh-token")
-      .then(res => {
-        if (res.data.status === 200) {
-          localStorage.setItem("token", res.data.token)
-        }
-      })
-
+    const res = await api.get("/token/refresh-token");
+    if (res.data.status === 200) {
+      localStorage.setItem("token", res.data.token);
+      console.log("Token refreshed!");
+    } else {
+      console.warn("Token refresh failed with status", res.data.status);
+    }
   } catch (error) {
-    console.error("Failed to refresh token: ", error)
+    console.error("Failed to refresh token:", error);
   }
 }
 

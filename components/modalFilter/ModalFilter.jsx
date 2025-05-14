@@ -72,9 +72,9 @@ export default function ModalFilter(props) {
 
       <div className="modal-filter-separator" />
 
-      <div className="modal-filter-country">
-        <h3>Country:</h3>
-        <div className="modal-filter-country-checkbox">
+      <div className="modal-filter-language">
+        <h3>Languages:</h3>
+        <div className="modal-filter-language-checkbox">
           <ul>
             <CheckboxItem name="argentina" id="argentina" />
             <CheckboxItem name="australia" id="australia" />

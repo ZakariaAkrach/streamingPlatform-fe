@@ -1,17 +1,16 @@
 .home-views-movies{
     margin-top: 10px;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 .home-view-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  row-gap: 30px;
   justify-content: space-between;
 }
 
 @media (max-width: 768px) {
   .home-view-cards {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -1,10 +1,17 @@
-.home-view-single-card > img {
+.home-view-single-card{
+  width: 10rem;
+  background-color: #e5e8ee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.poster-rate-title > img {
   width: 100%;
   height: 240px;
   object-fit: cover;
 }
 .home-view-single-title-card {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 .home-view-card-button {
   display: flex;
@@ -12,7 +19,10 @@
   align-items: center;
   background-color: #404747;
   padding: 5px;
-  margin: 20px 10px 0 10px;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   border-radius: 10px;
 }
 .home-view-card-button:hover{
@@ -28,4 +38,14 @@
   border: none;
   background-color: #404747;
   color: white;
+}
+@media (max-width: 768px) {
+.home-view-single-card{
+  width: 7rem;
+}
+.poster-rate-title > img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 }

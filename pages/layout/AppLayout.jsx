@@ -7,8 +7,9 @@ import { refreshToken } from "../../api/axiosConfig";
 export default function AppLayout() {
   useEffect(() => {
     const interval = setInterval(() => {
+       console.log("Calling refreshToken...");
       refreshToken();
-    }, 12 * 60 * 1000);
+    }, 10 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);

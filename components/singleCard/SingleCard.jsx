@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Rate from "../../components/rate/Rate";
 import "./singleCard.scss";
 
@@ -15,17 +16,21 @@ export default function SingleCard(params) {
   }, [screenWidth]);
 
   return (
-    <div className="home-view-single-card">
-      <div className="poster-rate-title">
-        <img src={posterUrl + params.data.posterPath} alt="slider-photo" />
-        <Rate />
-        <h4 className="home-view-single-title-card">{params.data.title}</h4>
-      </div>
+    <Link className="home-view-single-card-link-wrapper" to={`content-detail/${params.data.id}`} state={{data: params.data}}>
+      <div className="home-view-single-card">
+        <div className="poster-rate-title">
+          <img src={posterUrl + params.data.posterPath} alt="slider-photo" />
+          <Rate />
+          <h4 className="home-view-single-title-card">{params.data.title}</h4>
+        </div>
 
-      {screenWidth > 768 ? <div className="home-view-card-button">
-        <i className="fa-solid fa-play"></i>
-        <button>Watch now</button>
-      </div> : null}
-    </div>
+        {screenWidth > 768 ? (
+          <div className="home-view-card-button">
+            <i className="fa-solid fa-play"></i>
+            <button>Watch now</button>
+          </div>
+        ) : null}
+      </div>
+    </Link>
   );
 }

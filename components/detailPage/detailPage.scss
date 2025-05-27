@@ -104,6 +104,45 @@
   height: auto;
 }
 
+//comment
+.comment-container {
+  margin-bottom: 20px;
+}
+.comment-add-photo-input {
+  display: flex;
+  gap: 10px;
+}
+.comment-add-photo > img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.comment-add-input {
+  width: 80%;
+}
+.comment-add-input > textarea {
+  width: 100%;
+  height: 5rem;
+  padding: 0.5rem;
+  resize: none;
+}
+.comment-post-button {
+  float: right;
+  border: none;
+  padding: 0.40rem 0.75rem;
+  background-color: #1e90ff;
+  color: white;
+  border-radius: 5px;
+}
+
+.comment-user-photo > img {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 @media (max-width: 768px) {
   .detail-page-principal-img {
     height: auto;

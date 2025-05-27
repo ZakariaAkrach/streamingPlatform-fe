@@ -1,13 +1,14 @@
 import { useLocation, Link } from "react-router-dom";
-import { nanoid } from "nanoid";
+import { useState } from "react";
+import api from "../../api/axiosConfig";
 import "./detailPage.scss";
 import img_not_found from "../../src/images/img_not_found.png";
 
 export default function DetailPage() {
   const { state } = useLocation();
+  const [comment, setComment] = useState("");
   const posterUrl = "https://image.tmdb.org/t/p/original/";
-  const imgCastUrl = "https://image.tmdb.org/t/p/original/";
-  console.log(state);
+  const imgCastUrl = "https://image.tmdb.org/t/p/w500/";
 
   function getGenres() {
     const genresArray = [];
@@ -16,9 +17,9 @@ export default function DetailPage() {
     }
     return (
       <>
-        {genresArray.map((genre, id) => {
+        {genresArray.map((genre) => {
           return (
-            <Link key={nanoid()} className="detail-page-info-genres-link">
+            <Link key={genre} className="detail-page-info-genres-link">
               {genre}
             </Link>
           );
@@ -49,12 +50,39 @@ export default function DetailPage() {
             </div>
             <div className="cast-card-info">
               <h5 className="cast-card-info-titles">{movieCast.cast.name}</h5>
-              <h6 className="cast-card-info-titles">{movieCast.characterName}</h6>
+              <h6 className="cast-card-info-titles">
+                {movieCast.characterName}
+              </h6>
             </div>
           </div>
         </div>
       );
     });
+  }
+
+  function handleOnChangeTextArea(e) {
+    setComment(e.target.value);
+  }
+
+  function handlePostCommit() {
+    if (!comment.trim()) {
+      alert("The comment can't be empty");
+      setComment(""); //When the user add empty space
+      return;
+    }
+    api
+      .post("http://192.168.1.10:8080/comments/add", {
+        content: comment,
+      })
+      .then((response) => {
+        alert("Comment added");
+        console.log("Add comment ", response);
+      })
+      .catch((error) => {
+        console.log("Error while adding comment ", error);
+      });
+
+    setComment("");
   }
   return (
     <div className="detail-page-container">
@@ -111,7 +139,59 @@ export default function DetailPage() {
         </section>
 
         <section>
-          <h1>Section comment</h1>
+          <h1>Comments</h1>
+          <div className="comment-container">
+            <div className="comment-wrapper">
+              <div className="comment-add">
+                <div className="comment-add-photo-input">
+                  <div className="comment-add-photo">
+                    <img src={img_not_found} alt="photo user" />
+                  </div>
+                  <div className="comment-add-input">
+                    <h4>Mario Rossi</h4>
+                    <textarea
+                      name="comment"
+                      id="comment"
+                      placeholder="Leave a comment"
+                      value={comment}
+                      onChange={(e) => handleOnChangeTextArea(e)}
+                    ></textarea>
+                    <button
+                      onClick={() => handlePostCommit()}
+                      className="comment-post-button"
+                    >
+                      Post
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="comments-users">
+                <div className="comment-user-photo-info">
+
+                  <div className="comment-user-photo">
+                    <img src={img_not_found} alt="photo user" />
+                  </div>
+
+                  <div className="comment-user-info">
+                    <h5>Mario rossi</h5>
+                    <p>4 Days ago</p>
+                    <p>Commento bellissimo film</p>
+                  </div>
+
+                  <div className="comment-user-actions">
+                    <div className="comment-user-action-reply">
+                      <i class="fa-solid fa-reply"></i> <span>Reply</span>
+                    </div>
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <i class="fa-solid fa-thumbs-down"></i>
+                    <p>More</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>

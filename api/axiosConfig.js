@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  //baseURL: 'http://localhost:8080'
-  baseURL: 'https://streamingplatform-be.onrender.com'
+  baseURL: 'http://192.168.1.10:8080'
+  //baseURL: 'https://streamingplatform-be.onrender.com'
 })
 
 api.interceptors.request.use(function (config) {
@@ -12,6 +12,21 @@ api.interceptors.request.use(function (config) {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      error.response.data?.error === "expired_token"
+    ) {
+      console.log(error)
+      localStorage.removeItem("token")
+      alert("Fare login da reinderizzare vedere logica");
+    }
+  }
+)
 
 export const getAuthToken = () => {
   return localStorage.getItem('token');
@@ -31,9 +46,11 @@ export const refreshToken = async () => {
       console.log("Token refreshed!");
     } else {
       console.warn("Token refresh failed with status", res.data.status);
+      localStorage.removeItem("token")
     }
   } catch (error) {
     console.error("Failed to refresh token:", error);
+    localStorage.removeItem("token")
   }
 }
 

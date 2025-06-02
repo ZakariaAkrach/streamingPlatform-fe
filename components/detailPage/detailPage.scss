@@ -104,6 +104,27 @@
   height: auto;
 }
 
+.block-one {
+  background-color: #f9f9f9; /* Grigio chiaro */
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.block-two {
+  background-color: #e6f7ff; /* Azzurro molto chiaro */
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.blue-icon {
+  color: #1e90ff;
+}
+.red-icon {
+  color: red;
+}
+
 //comment
 .comment-container {
   margin-bottom: 20px;
@@ -130,17 +151,10 @@
 .comment-post-button {
   float: right;
   border: none;
-  padding: 0.40rem 0.75rem;
+  padding: 0.4rem 0.75rem;
   background-color: #1e90ff;
   color: white;
   border-radius: 5px;
-}
-
-.comment-user-photo > img {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  object-fit: cover;
 }
 
 @media (max-width: 768px) {

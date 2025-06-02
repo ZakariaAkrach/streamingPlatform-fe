@@ -1,12 +1,18 @@
-import { useLocation, Link } from "react-router-dom";
-import { useState } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { safeGET, safePOST, safePUT } from "../../api/authenticatedApi";
 import api from "../../api/axiosConfig";
 import "./detailPage.scss";
 import img_not_found from "../../src/images/img_not_found.png";
+import { LoginContext } from "../../context/LoginContext";
+import Comments from "../comments/Comments";
 
 export default function DetailPage() {
   const { state } = useLocation();
-  const [comment, setComment] = useState("");
+  const [commentPost, setCommentPost] = useState("");
+  const [userComments, setUserComments] = useState([]);
+  const { isLogged, setIsLogged } = useContext(LoginContext);
+  const navigate = useNavigate();
   const posterUrl = "https://image.tmdb.org/t/p/original/";
   const imgCastUrl = "https://image.tmdb.org/t/p/w500/";
 
@@ -61,29 +67,69 @@ export default function DetailPage() {
   }
 
   function handleOnChangeTextArea(e) {
-    setComment(e.target.value);
+    setCommentPost(e.target.value);
   }
 
   function handlePostCommit() {
-    if (!comment.trim()) {
-      alert("The comment can't be empty");
-      setComment(""); //When the user add empty space
-      return;
-    }
-    api
-      .post("http://192.168.1.10:8080/comments/add", {
-        content: comment,
+    if (isLogged) {
+      if (!commentPost.trim()) {
+        alert("The comment can't be empty");
+        setCommentPost(""); //When the user add empty space
+        return;
+      }
+      safePOST("/comments/add", {
+        content: commentPost,
+        movieId: state.data.id,
       })
+        .then((response) => {
+          alert("Comment added");
+          console.log("Add comment ", response);
+        })
+        .catch((error) => {
+          console.log("Error while adding comment ", error);
+        });
+
+      setCommentPost("");
+    }
+  }
+
+  function handLike(commentId, liked) {
+    if (isLogged) {
+      safePUT("/comments/like", {
+        commentId: commentId,
+        liked: liked,
+      })
+        .then((response) => {
+          console.log("zaaaak ",userComments)
+          setUserComments((prev) =>
+            prev.map((singleComment) => {
+              if (singleComment.id === response.data.data?.commentId) {
+                return {
+                  ...singleComment,
+                  likedByCurrentUser: response.data.data.liked,
+                };
+              }
+              return singleComment;
+            })
+          );
+        })
+        .catch((error) => {
+          console.log("Error while adding like to the comment ", error);
+        });
+    }
+  }
+
+  useEffect(() => {
+    api
+      .get(`/comments/get-all-by-content/${state.data.id}`)
       .then((response) => {
-        alert("Comment added");
-        console.log("Add comment ", response);
+        setUserComments(response.data.data);
       })
       .catch((error) => {
-        console.log("Error while adding comment ", error);
+        console.log("get-all-by-content error: " + error);
       });
+  }, [state.data.id]);
 
-    setComment("");
-  }
   return (
     <div className="detail-page-container">
       <div className="detail-page-wrapper">
@@ -148,48 +194,38 @@ export default function DetailPage() {
                     <img src={img_not_found} alt="photo user" />
                   </div>
                   <div className="comment-add-input">
-                    <h4>Mario Rossi</h4>
+                    <h4>{localStorage.getItem("username") !== null ? localStorage.getItem("username") : "Not logged"}</h4>
                     <textarea
                       name="comment"
                       id="comment"
-                      placeholder="Leave a comment"
-                      value={comment}
+                      placeholder={
+                        isLogged
+                          ? "Leave a comment"
+                          : "You need to be logged in to post."
+                      }
+                      value={commentPost}
                       onChange={(e) => handleOnChangeTextArea(e)}
+                      disabled={!isLogged}
                     ></textarea>
                     <button
                       onClick={() => handlePostCommit()}
                       className="comment-post-button"
                     >
-                      Post
+                      {isLogged ? "Post" : "Log in"}
                     </button>
                   </div>
                 </div>
               </div>
 
-              <div className="comments-users">
-                <div className="comment-user-photo-info">
-
-                  <div className="comment-user-photo">
-                    <img src={img_not_found} alt="photo user" />
-                  </div>
-
-                  <div className="comment-user-info">
-                    <h5>Mario rossi</h5>
-                    <p>4 Days ago</p>
-                    <p>Commento bellissimo film</p>
-                  </div>
-
-                  <div className="comment-user-actions">
-                    <div className="comment-user-action-reply">
-                      <i class="fa-solid fa-reply"></i> <span>Reply</span>
-                    </div>
-                    <i class="fa-solid fa-thumbs-up"></i>
-                    <i class="fa-solid fa-thumbs-down"></i>
-                    <p>More</p>
-                  </div>
-
-                </div>
-              </div>
+              {
+                <Comments
+                  userComments={userComments}
+                  img_not_found={img_not_found}
+                  isLogged={isLogged}
+                  handLike={handLike}
+                  movieId={state.data.id}
+                />
+              }
             </div>
           </div>
         </section>

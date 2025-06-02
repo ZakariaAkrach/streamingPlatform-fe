@@ -15,3 +15,11 @@ export const safePOST = async (url, data, config = {}) => {
   }
   return api.post(url, data, config);
 };
+
+
+export const safePUT = async (url, data, config = {}) => {
+  if (!isAuthenticated()) {
+    return Promise.reject("No token found")
+  }
+  return api.put(url, data, config);
+};

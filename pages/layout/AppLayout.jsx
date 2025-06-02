@@ -9,7 +9,7 @@ export default function AppLayout() {
     const interval = setInterval(() => {
        console.log("Calling refreshToken...");
       refreshToken();
-    }, 10 * 60 * 1000);
+    }, 45 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);

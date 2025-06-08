@@ -72,6 +72,8 @@ export default function DetailPage() {
         });
 
       setCommentPost("");
+    } else {
+      navigate("/login", { state: { redirectToContentDetailUrl: `/content-detail/${state.data.id}`, redirectData: state.data } });
     }
   }
 

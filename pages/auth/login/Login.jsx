@@ -15,6 +15,8 @@ export default function Login() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const errorOauth2 = queryParams.get("errorOauth2");
+  const redirectToContentDetailUrl = location.state?.redirectToContentDetailUrl;
+  const redirectToContentDetailData = location.state?.redirectData;
 
   useEffect(() => {
     if (errorOauth2 === null) {
@@ -40,11 +42,30 @@ export default function Login() {
           localStorage.setItem("token", res.data.token);
           setIsLogged(true);
           setResponseLogin(res.data.message);
-          navigate("/user-dasheboard");
+
+          if (
+            redirectToContentDetailUrl !== null &&
+            redirectToContentDetailUrl !== ""
+          ) {
+            navigate(redirectToContentDetailUrl, {
+              state: { data: redirectToContentDetailData },
+            });
+            return;
+          }
+
+          if (res.data.role === "USER") {
+            navigate("/user-dasheboard");
+            return;
+          }
+
+          if (res.data.role === "ADMIN") {
+          }
+
+          if (res.data.role === "CONTENT_MANAGER") {
+          }
         } else {
           setLoginFailed(true);
           setResponseLogin(res.data.message);
-          console.log(res.data);
         }
       });
   }

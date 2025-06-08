@@ -14,8 +14,6 @@ export default function Home() {
         if (res.data.status === 200) {
           console.log(res.data);
           setTrendingMovieData(res.data.data);
-        } else {
-          console.log(res.data.message);
         }
       })
       .catch((error) => {
@@ -27,10 +25,7 @@ export default function Home() {
       .get("/movie/get-trending-tv-show")
       .then((res) => {
         if (res.data.status === 200) {
-          console.log(res.data);
           setTrendingTvShowData(res.data.data);
-        } else {
-          console.log(res.data.message);
         }
       })
       .catch((error) => {

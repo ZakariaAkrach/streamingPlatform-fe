@@ -7,8 +7,8 @@ export default function SectionHome(params) {
     for (let i = 0; i < params.data.length; i++) {
       cards.push(
         <SingleCard
-          key={params.data[i].title}
-          id={params.data[i].title}
+          key={params.data[i].id}
+          id={params.data[i].id}
           data={params.data[i]}
         />
       );

@@ -13,7 +13,6 @@ export default function Header() {
     api.post("http://localhost:8080/logout");
     localStorage.removeItem("token");
     setIsLogged(false);
-    navigate("/login");
   }
 
   const buttonLoginStyle = {

@@ -1,0 +1,46 @@
+.comment-user-photo-info {
+  display: flex;
+  gap: 10px;
+}
+.comment-user-photo > img {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.comment-user-actions {
+  display: flex;
+  gap: 20px;
+  align-items: baseline;
+}
+.comment-user-actions-likes-dislikes {
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+}
+.comment-user-action-more {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.comment-user-info-name,
+.comment-user-info-date {
+  margin-bottom: 2px;
+}
+.comment-user-info-name {
+  font-size: 1.1rem;
+}
+.comment-user-info-date {
+  font-size: 0.95rem;
+}
+.comment-user-info-comment {
+  margin-bottom: 5px;
+}
+.son {
+    margin-left: 3rem;
+    background-color: #a3c6e9;
+}
+.reply-comment > textarea {
+    width: 100%;
+    resize: none;
+}

@@ -1,11 +1,12 @@
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { safeGET, safePOST, safePUT } from "../../api/authenticatedApi";
+import { safePOST, safePUT } from "../../api/authenticatedApi";
 import api from "../../api/axiosConfig";
 import "./detailPage.scss";
 import img_not_found from "../../src/images/img_not_found.png";
 import { LoginContext } from "../../context/LoginContext";
 import Comments from "../comments/Comments";
+import InfoMovie from "../infoMovie/InfoMovie";
 
 export default function DetailPage() {
   const { state } = useLocation();
@@ -15,24 +16,6 @@ export default function DetailPage() {
   const navigate = useNavigate();
   const posterUrl = "https://image.tmdb.org/t/p/original/";
   const imgCastUrl = "https://image.tmdb.org/t/p/w500/";
-
-  function getGenres() {
-    const genresArray = [];
-    for (let i = 0; i < state.data.genres.length; i++) {
-      genresArray.push(state.data.genres[i].name);
-    }
-    return (
-      <>
-        {genresArray.map((genre) => {
-          return (
-            <Link key={genre} className="detail-page-info-genres-link">
-              {genre}
-            </Link>
-          );
-        })}
-      </>
-    );
-  }
 
   function getCast() {
     const movieCastArray = [];
@@ -83,7 +66,6 @@ export default function DetailPage() {
       })
         .then((response) => {
           alert("Comment added");
-          console.log("Add comment ", response);
         })
         .catch((error) => {
           console.log("Error while adding comment ", error);
@@ -93,14 +75,13 @@ export default function DetailPage() {
     }
   }
 
-  function handLike(commentId, liked) {
+  function handCommentLike(commentId, liked) {
     if (isLogged) {
       safePUT("/comments/like", {
         commentId: commentId,
         liked: liked,
       })
         .then((response) => {
-          console.log("zaaaak ",userComments)
           setUserComments((prev) =>
             prev.map((singleComment) => {
               if (singleComment.id === response.data.data?.commentId) {
@@ -134,47 +115,7 @@ export default function DetailPage() {
     <div className="detail-page-container">
       <div className="detail-page-wrapper">
         <section className="detail-page-wrapper-image-info">
-          <img
-            className="detail-page-principal-img"
-            src={posterUrl + state.data.backdropPath}
-            alt="image background detail content"
-          />
-
-          <div className="detail-page-wrapper-info">
-            <h1>{state.data.title}</h1>
-            <p>{state.data.description}</p>
-
-            <div className="detail-page-info-button-wrapper">
-              <button className="detail-page-info-button">
-                {state.data.typeMovie}
-              </button>
-              <button className="detail-page-info-button">
-                {state.data.language.toUpperCase()}
-              </button>
-              <button className="detail-page-info-button">
-                {state.data.runtime + " h"}
-              </button>
-              <button className="detail-page-info-button">
-                {new Date(state.data.releaseDate).getFullYear()}
-              </button>
-            </div>
-            <div className="detail-page-wrapper-links">{getGenres()}</div>
-
-            <div className="detail-page-wrapper-button">
-              <div className="detail-page-wrapper-button-circle">
-                <i className="fa-solid fa-circle-play"></i>
-              </div>
-              <div className="detail-page-wrapper-button-circle">
-                <i className="fa-solid fa-thumbs-up"></i>
-              </div>
-              <div className="detail-page-wrapper-button-circle">
-                <i className="fa-solid fa-thumbs-down"></i>
-              </div>
-              <div className="detail-page-wrapper-button-circle">
-                <i className="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
+          <InfoMovie posterUrl={posterUrl} state={state} isLogged={isLogged} />
         </section>
 
         <section className="detail-page-cast">
@@ -194,7 +135,11 @@ export default function DetailPage() {
                     <img src={img_not_found} alt="photo user" />
                   </div>
                   <div className="comment-add-input">
-                    <h4>{localStorage.getItem("username") !== null ? localStorage.getItem("username") : "Not logged"}</h4>
+                    <h4>
+                      {localStorage.getItem("username") !== null
+                        ? localStorage.getItem("username")
+                        : "Not logged"}
+                    </h4>
                     <textarea
                       name="comment"
                       id="comment"
@@ -222,7 +167,7 @@ export default function DetailPage() {
                   userComments={userComments}
                   img_not_found={img_not_found}
                   isLogged={isLogged}
-                  handLike={handLike}
+                  handCommentLike={handCommentLike}
                   movieId={state.data.id}
                 />
               }

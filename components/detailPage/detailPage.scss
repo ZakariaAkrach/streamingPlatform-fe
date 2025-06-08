@@ -12,60 +12,6 @@
   width: 100%;
   position: relative;
 }
-.detail-page-principal-img {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-}
-.detail-page-wrapper-info {
-  align-items: center;
-  padding: 20px;
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 40%;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.detail-page-info-button {
-  color: white;
-  background-color: #33373d;
-  border: none;
-  border-radius: 3px;
-  font-size: 0.9rem;
-  margin-right: 0.75rem;
-  margin-bottom: 10px;
-}
-.detail-page-info-genres-link {
-  margin-right: 15px;
-  text-decoration: underline;
-  color: white;
-}
-.detail-page-info-genres-link:hover {
-  color: black;
-}
-.detail-page-wrapper-button {
-  display: flex;
-  gap: 20px;
-  color: #1e90ff;
-  margin-top: 10px;
-}
-.detail-page-wrapper-button-circle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
-  background-color: #33373d;
-  cursor: pointer;
-}
-.detail-page-wrapper-button-circle > i {
-  font-size: 2rem;
-  display: flex;
-  margin: auto;
-}
-
 //cast
 .cast-card-wrapper {
   display: flex;

@@ -32,7 +32,7 @@ export default function Comments(params) {
             )}
             <div
               className="comment-user-actions-likes-dislikes"
-              onClick={() => params.handLike(prev.id, true)}
+              onClick={() => params.handCommentLike(prev.id, true)}
             >
               <i
                 className={`fa-solid fa-thumbs-up ${
@@ -47,7 +47,7 @@ export default function Comments(params) {
             </div>
             <div
               className="comment-user-actions-likes-dislikes"
-              onClick={() => params.handLike(prev.id, false)}
+              onClick={() => params.handCommentLike(prev.id, false)}
             >
               <i
                 className={`fa-solid fa-thumbs-down ${
@@ -61,7 +61,7 @@ export default function Comments(params) {
               <p>{prev.dislike > 0 ? prev.dislike : null}</p>
             </div>
 
-            <div className="comment-user-action-more">
+            <div className="comment-user-action-more" onClick={() => handleMoreAction()}>
               <i className="fa-solid fa-ellipsis"></i>
               <p>More</p>
             </div>
@@ -70,6 +70,10 @@ export default function Comments(params) {
         </div>
       </div>
     );
+  }
+
+  function handleMoreAction() {
+    alert("In future i shuld add some operation but for now is just an extra feature")
   }
 
   function showComment() {
@@ -114,7 +118,6 @@ export default function Comments(params) {
         movieId: params.movieId,
       })
         .then((response) => {
-          alert("Comment added");
           console.log("Add comment ", response);
         })
         .catch((error) => {

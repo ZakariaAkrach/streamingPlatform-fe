@@ -37,7 +37,6 @@ const router = createBrowserRouter(
         path="oauth2-redirect-handler"
         element={<OAuth2RedirectHandler />}
       />
-      <Route path="content-manager" element={<ContentManager />} />
 
       <Route
         path="user-dasheboard"
@@ -47,6 +46,16 @@ const router = createBrowserRouter(
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="content-manager"
+        element={
+          <ProtectedRoute>
+            <ContentManager />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="content-detail/:id" element={<DetailPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>

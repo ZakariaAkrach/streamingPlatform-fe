@@ -43,10 +43,7 @@ export default function Login() {
           setIsLogged(true);
           setResponseLogin(res.data.message);
 
-          if (
-            redirectToContentDetailUrl !== null &&
-            redirectToContentDetailUrl !== ""
-          ) {
+          if (redirectToContentDetailUrl) {
             navigate(redirectToContentDetailUrl, {
               state: { data: redirectToContentDetailData },
             });
@@ -62,6 +59,8 @@ export default function Login() {
           }
 
           if (res.data.role === "CONTENT_MANAGER") {
+            navigate("/content-manager");
+            return;
           }
         } else {
           setLoginFailed(true);
@@ -72,7 +71,7 @@ export default function Login() {
 
   function loginGoogle() {
     localStorage.removeItem("token");
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = "http://192.168.1.19:8080/oauth2/authorization/google";
     //window.location.href = "https://streamingplatform-be.onrender.com/oauth2/authorization/google"
   }
 

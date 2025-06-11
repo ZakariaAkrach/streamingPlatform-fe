@@ -57,3 +57,26 @@
 .favorite-red {
   color: red;
 }
+@media (max-width: 768px) {
+  .detail-page-principal-img {
+    height: auto;
+  }
+  .detail-page-wrapper-info {
+    position: static; //remove position absolute
+    width: 100%;
+    padding: 10px;
+  }
+  .detail-page-wrapper-info > h1 {
+    font-size: 1.9rem;
+  }
+  .cast-card {
+    width: 150px;
+  }
+  .cast-card-info {
+    width: 75%;
+  }
+  .cast-card-img > img {
+    width: 7rem;
+    height: 7rem;
+  }
+}

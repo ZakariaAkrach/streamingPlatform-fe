@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { safeGET } from "../../../api/authenticatedApi";
 import "./contentManager.scss";
+import ContentManagerTable from "../../../components/contentManagerTable/ContentManagerTable";
 
 // TODO -> aggiungere i click ai buttoni avanti e indietro per aggiornare la tabella
 // Aggiungere ricerca per film
@@ -11,11 +12,19 @@ import "./contentManager.scss";
 // Al click della penna aprire una modale o pagina dettaglio dove vede info come genere cast ecc... e li può modificare tutti
 export default function ContentManager() {
   const [allMovie, setAllMovie] = useState(null);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(0); //Current page of table
+  const [toggleFilters, setToggleFilters] = useState(false); //Show modal filter
+  const [typeMovie, setTypeMovie] = useState("MOVIE"); //filter
+  const [orderBy, setOrderBy] = useState("title"); //filter
+  const [toggleOrder, setToggleOrder] = useState(true); //filter
+  const [tableRowPage, setTableRowPage] = useState(10); //filter
+  const [toggleShowInsertMovie, setToggleShowInsertMovie] = useState(false);
   const posterUrl = "https://image.tmdb.org/t/p/w500/";
 
   useEffect(() => {
-    safeGET(`/content-manager/get-all-movie?page=${page}`)
+    safeGET(
+      `/content-manager/get-all-movie?page=${page}&typeMovie=${typeMovie}&sortBy=${orderBy}&ascending=${toggleOrder}&size=${tableRowPage}`
+    )
       .then((response) => {
         console.log(response.data);
         setAllMovie(response.data);
@@ -26,148 +35,48 @@ export default function ContentManager() {
           error
         );
       });
-  }, [page]);
+  }, [page, typeMovie, orderBy, toggleOrder, tableRowPage]);
 
-  function populateTable() {
-    return allMovie.data.map((singleMovie) => {
-      return (
-        <tr key={singleMovie.id}>
-          <td>
-            <div className="content-manager-title-img">
-              <img src={posterUrl + singleMovie.posterPath} alt="img content" />
-              {singleMovie.title}
-            </div>
-          </td>
-          <td>{getLanguageName(singleMovie.language)}</td>
-          <td>{singleMovie.releaseDate}</td>
-          <td style={{ color: singleMovie.active ? "green" : "red" }}>
-            {singleMovie.active ? "Published" : "Unpublished "}
-          </td>
-          <td>
-            <div className="content-manager-button-action">
-              <i className="fa-solid fa-pen content-manager-pen"></i>{" "}
-              <i className="fa-solid fa-trash content-manager-trash"></i>
-            </div>
-          </td>
-        </tr>
-      );
-    });
-  }
-
-  function getLanguageName(code) {
-    const languageMap = {
-      en: "English",
-      es: "Spanish",
-      nl: "Dutch",
-      fr: "French",
-      de: "German",
-      pt: "Portuguese",
-      zh: "Chinese",
-      da: "Danish",
-      ru: "Russian",
-      ar: "Arabic",
-      th: "Thai",
-    };
-
-    return languageMap[code] || "Unknown language";
-  }
 
   return allMovie ? (
     <div className="content-manager-container">
       <div className="content-manager-wrapper">
-        <section className="content-manager-table-pagination">
-          <div className="content-manager-table-title-actions">
-            <div className="content-manager-table-title">
-              <h1>Content Manager Dashboard</h1>
-            </div>
-            <div className="content-manager-table-actions">
-              <div>
-                <i class="fas fa-sliders-h"></i> Filter
-              </div>
-              <div>+Add Movie</div>
-            </div>
-          </div>
-          <div className="content-manager-table-filters">
-            <form>
-              <div className="content-manager-table-single-filter">
-                <label htmlFor="type-movie">Type Movie</label>
-                <select id="type-movie" name="type-movie">
-                  <option value="MOVIE">Movie</option>
-                  <option value="TV_SHOW">Tv Show</option>
-                </select>
-              </div>
 
-              <div className="content-manager-table-single-filter">
-                <label htmlFor="order-by">Order By</label>
-                <select id="order-by" name="order-by">
-                  <option value="title">Movie Title</option>
-                  <option value="language">Language</option>
-                  <option value="releaseDate">Release Date</option>
-                  <option value="status">Status</option>
-                </select>
-              </div>
+      <ContentManagerTable
+        allMovie={allMovie}
+        setToggleFilters={setToggleFilters}
+        toggleFilters={toggleFilters}
+        setToggleShowInsertMovie={setToggleShowInsertMovie}
+        setTypeMovie={setTypeMovie}
+        setOrderBy={setOrderBy}
+        orderBy={orderBy}
+        setToggleOrder={setToggleOrder}
+        toggleOrder={toggleOrder}
+        setTableRowPage={setTableRowPage}
+        tableRowPage={tableRowPage}
+        typeMovie={typeMovie}
+        page={page}
+        setPage={setPage}
+        posterUrl={posterUrl}
+      />
 
-              <div className="content-manager-table-single-filter">
-                <label for="orderToggle">Order: Asceng/desceng</label>
-                <label class="switch">
-                  <input type="checkbox" id="orderToggle" />
-                  <span class="slider"></span>
-                </label>
-              </div>
+        {toggleShowInsertMovie ? (
+          <div className="show-modal-insert-new-movie">
+            <h1>ciaoooo</h1>
 
-              <div className="content-manager-table-single-filter">
-                <label htmlFor="row">Row Page</label>
-                <select id="row" name="row">
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                  <option value="30">30</option>
-                  <option value="40">40</option>
-                  <option value="50">50</option>
-                </select>
-              </div>
-            </form>
-          </div>
-          <div className="content-manager-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Movie Title</th>
-                  <th>Language</th>
-                  <th>Release Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>{populateTable()}</tbody>
-            </table>
-          </div>
-
-          <div className="content-manager-pagination">
-            <div className="content-manager-pagination-info">
-              <p>{`Showing ${allMovie.page + 1} to ${allMovie.size} of ${
-                allMovie.totalPages
-              } pages`}</p>
-            </div>
-            <div className="content-manager-pagination-button">
-              <div
-                title="Previous"
-                onClick={() => (page > 0 ? setPage((prev) => prev - 1) : null)}
+            <div className="modal-filter-button">
+              <button className="modal-filter-button-filter">
+                <i className="fa-solid fa-magnifying-glass"></i> Filter
+              </button>
+              <button
+                onClick={() => setToggleShowInsertMovie(prev => !prev)}
+                className="modal-filter-button-close"
               >
-                <i className="fa-solid fa-left-long"></i>
-              </div>
-              <div
-                title="Next"
-                onClick={() =>
-                  page < allMovie.totalPages
-                    ? setPage((prev) => prev + 1)
-                    : null
-                }
-              >
-                <i className="fa-solid fa-right-long"></i>
-              </div>
+                <i className="fa-solid fa-xmark"></i> Close
+              </button>
             </div>
           </div>
-        </section>
+        ) : null}
       </div>
     </div>
   ) : (

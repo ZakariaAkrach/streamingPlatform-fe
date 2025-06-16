@@ -18,6 +18,11 @@
   align-items: center;
   cursor: pointer;
 }
+.content-manager-table-actions-filter,
+.content-manager-table-actions-add-new-movie{
+  display: flex;
+  gap: 5px;
+}
 
 //filters
 .content-manager-table-filters {

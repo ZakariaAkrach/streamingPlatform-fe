@@ -20,12 +20,25 @@ export default function ContentManagerTable(params) {
   }
 
   function populateTable() {
+    if (!params.allMovie?.data || params.allMovie.data.length === 0) {
+      return (
+        <tr>
+          <td colSpan="5" style={{ textAlign: "center", padding: "1rem" }}>
+            No content found.
+          </td>
+        </tr>
+      );
+    }
+
     return params.allMovie.data.map((singleMovie) => {
       return (
         <tr key={singleMovie.id}>
           <td>
             <div className="content-manager-title-img">
-              <img src={params.posterUrl + singleMovie.posterPath} alt="img content" />
+              <img
+                src={params.posterUrl + singleMovie.posterPath}
+                alt="img content"
+              />
               {singleMovie.title}
             </div>
           </td>
@@ -52,22 +65,35 @@ export default function ContentManagerTable(params) {
           <h1>Content Manager Dashboard</h1>
         </div>
         <div className="content-manager-table-actions">
-          <div onClick={() => params.setToggleFilters((prev) => !prev)}>
+          <div
+            className="content-manager-table-actions-filter"
+            onClick={() => params.setToggleFilters((prev) => !prev)}
+          >
             <i className="fas fa-sliders-h"></i> Filter
           </div>
-          <div onClick={() => params.setToggleShowInsertMovie((prev) => !prev)}>
-            +Add Movie
+          <div
+            className="content-manager-table-actions-add-new-movie"
+            onClick={() => params.setToggleShowInsertMovie((prev) => !prev)}
+          >
+            <i className="fa-solid fa-plus"></i> Add Movie
           </div>
         </div>
       </div>
 
       {params.toggleFilters ? (
         <div className="content-manager-table-filters">
-
-        <div className="content-manager-table-single-filter-search">
-          <i className="fa-solid fa-magnifying-glass"></i>
-          <input type="search" placeholder="Search Movie" aria-label="Search" />
-        </div>
+          <div className="content-manager-table-single-filter-search">
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="search"
+              placeholder="Search Movie"
+              aria-label="Search"
+              onChange={(e) => {
+                params.setSearchByTitle(e.target.value);
+                params.setPage(0);
+              }}
+            />
+          </div>
 
           <div className="content-manager-table-single-filter content-manager-select">
             <label htmlFor="type-movie">Type Movie</label>
@@ -147,21 +173,25 @@ export default function ContentManagerTable(params) {
 
       <div className="content-manager-pagination">
         <div className="content-manager-pagination-info">
-          <p>{`Showing ${params.allMovie.page + 1} to ${params.allMovie.size} of ${
-            params.allMovie.totalPages
-          } pages`}</p>
+          <p>{`Showing ${params.allMovie.page + 1} to ${
+            params.allMovie.size
+          } of ${params.allMovie.totalPages} pages`}</p>
         </div>
         <div className="content-manager-pagination-button">
           <div
             title="Previous"
-            onClick={() => (page > 0 ? setPage((prev) => prev - 1) : null)}
+            onClick={() =>
+              params.page > 0 ? params.setPage((prev) => prev - 1) : null
+            }
           >
             <i className="fa-solid fa-left-long"></i>
           </div>
           <div
             title="Next"
             onClick={() =>
-              params.page < params.allMovie.totalPages ? params.setPage((prev) => prev + 1) : null
+              !params.allMovie.lastPage
+                ? params.setPage((prev) => prev + 1)
+                : null
             }
           >
             <i className="fa-solid fa-right-long"></i>

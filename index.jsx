@@ -19,6 +19,7 @@ import ProtectedRoute from "./protected/ProtectedRoute";
 import OAuth2RedirectHandler from "./components/ouath2Redirect/OAuth2RedirectHandler";
 import ContentManager from "./pages/dashboard/contentManager/ContentManager";
 import DetailPage from "./components/detailPage/DetailPage";
+import EditContent from "./components/editContent/EditContent";
 
 const root = createRoot(document.getElementById("root"));
 
@@ -52,6 +53,16 @@ const router = createBrowserRouter(
         element={
           <ProtectedRoute>
             <ContentManager />
+          </ProtectedRoute>
+        }
+      />
+
+      
+      <Route
+        path="content-manager/edit"
+        element={
+          <ProtectedRoute>
+            <EditContent />
           </ProtectedRoute>
         }
       />

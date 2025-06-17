@@ -1,22 +1,42 @@
+import { Link } from "react-router-dom";
+import { safeDelete } from "../../api/authenticatedApi";
 import "./contentManagerTable.scss";
 
 export default function ContentManagerTable(params) {
-  function getLanguageName(code) {
-    const languageMap = {
-      en: "English",
-      es: "Spanish",
-      nl: "Dutch",
-      fr: "French",
-      de: "German",
-      pt: "Portuguese",
-      zh: "Chinese",
-      da: "Danish",
-      ru: "Russian",
-      ar: "Arabic",
-      th: "Thai",
-    };
+  const languageMap = {
+    en: "English",
+    es: "Spanish",
+    nl: "Dutch",
+    fr: "French",
+    de: "German",
+    pt: "Portuguese",
+    zh: "Chinese",
+    da: "Danish",
+    ru: "Russian",
+    ar: "Arabic",
+    th: "Thai",
+  };
 
+  function getLanguageName(code) {
     return languageMap[code] || "Unknown language";
+  }
+
+  
+  function handleDelete(id) {
+    safeDelete(`/content-manager/delete/${id}`)
+      .then((response) => {
+        console.log(response);
+        alert("movie deleted successfully");
+
+        params.setAllMovie((prev) => ({
+          ...prev,
+          data: prev.data.filter((movie) => movie.id !== id),
+          totalElemenets: prev.totalElemenets - 1,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error deleting movie:", error);
+      });
   }
 
   function populateTable() {
@@ -49,8 +69,26 @@ export default function ContentManagerTable(params) {
           </td>
           <td>
             <div className="content-manager-button-action">
-              <i className="fa-solid fa-pen content-manager-pen"></i>{" "}
-              <i className="fa-solid fa-trash content-manager-trash"></i>
+              <Link
+                to="edit"
+                state={{
+                  data: singleMovie,
+                  languageMap: languageMap,
+                  page: params.page,
+                  tableRowPage: params.tableRowPage,
+                  orderBy: params.orderBy,
+                  toggleOrder: params.toggleOrder,
+                  typeMovie: params.typeMovie,
+                  searchByTitle: params.searchByTitle, //Can be empty
+                }}
+              >
+                {" "}
+                <i className="fa-solid fa-pen content-manager-pen"></i>{" "}
+              </Link>
+              <i
+                className="fa-solid fa-trash content-manager-trash"
+                onClick={() => handleDelete(singleMovie.id)}
+              ></i>
             </div>
           </td>
         </tr>
@@ -70,6 +108,12 @@ export default function ContentManagerTable(params) {
             onClick={() => params.setToggleFilters((prev) => !prev)}
           >
             <i className="fas fa-sliders-h"></i> Filter
+          </div>
+          <div
+            className="content-manager-table-actions-filter"
+            onClick={params.resetFiltersToDefault}
+          >
+            <i className="fa-solid fa-filter-circle-xmark"></i> Reset Filters
           </div>
           <div
             className="content-manager-table-actions-add-new-movie"

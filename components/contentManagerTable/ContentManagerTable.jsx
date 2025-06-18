@@ -21,7 +21,7 @@ export default function ContentManagerTable(params) {
     return languageMap[code] || "Unknown language";
   }
 
-  
+
   function handleDelete(id) {
     safeDelete(`/content-manager/delete/${id}`)
       .then((response) => {

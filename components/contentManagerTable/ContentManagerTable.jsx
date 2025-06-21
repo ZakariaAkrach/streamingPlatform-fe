@@ -3,22 +3,10 @@ import { safeDelete } from "../../api/authenticatedApi";
 import "./contentManagerTable.scss";
 
 export default function ContentManagerTable(params) {
-  const languageMap = {
-    en: "English",
-    es: "Spanish",
-    nl: "Dutch",
-    fr: "French",
-    de: "German",
-    pt: "Portuguese",
-    zh: "Chinese",
-    da: "Danish",
-    ru: "Russian",
-    ar: "Arabic",
-    th: "Thai",
-  };
+
 
   function getLanguageName(code) {
-    return languageMap[code] || "Unknown language";
+    return params.languageMap[code] || "Unknown language";
   }
 
 
@@ -73,7 +61,7 @@ export default function ContentManagerTable(params) {
                 to="edit"
                 state={{
                   data: singleMovie,
-                  languageMap: languageMap,
+                  languageMap: params.languageMap,
                   page: params.page,
                   tableRowPage: params.tableRowPage,
                   orderBy: params.orderBy,

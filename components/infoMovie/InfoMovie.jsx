@@ -51,9 +51,9 @@ export default function InfoMovie({ posterUrl, state, isLogged }) {
       <>
         {genresArray.map((genre) => {
           return (
-            <Link key={genre} className="detail-page-info-genres-link">
+            <a onClick={() => alert("I plan to implement it")} key={genre} to="." className="detail-page-info-genres-link">
               {genre}
-            </Link>
+            </a>
           );
         })}
       </>

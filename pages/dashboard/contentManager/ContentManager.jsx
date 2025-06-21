@@ -3,11 +3,8 @@ import { safeGET } from "../../../api/authenticatedApi";
 import "./contentManager.scss";
 import ContentManagerTable from "../../../components/contentManagerTable/ContentManagerTable";
 import { useLocation } from "react-router-dom";
+import AddMovie from "../../../components/addMovie/AddMovie";
 
-// TODO -> aggiungere i click ai buttoni avanti e indietro per aggiornare la tabella
-// Aggiungere nuovo movie/tv show
-// Cancellare riga
-// Al click della penna aprire una modale o pagina dettaglio dove vede info come genere cast ecc... e li può modificare tutti
 export default function ContentManager() {
   const { state } = useLocation();
 
@@ -21,6 +18,20 @@ export default function ContentManager() {
   const [searchByTitle, setSearchByTitle] = useState(state?.searchByTitle ?? ""); //filter
   const [toggleShowInsertMovie, setToggleShowInsertMovie] = useState(false);
   const posterUrl = "https://image.tmdb.org/t/p/w500/";
+
+    const languageMap = {
+      en: "English",
+      es: "Spanish",
+      nl: "Dutch",
+      fr: "French",
+      de: "German",
+      pt: "Portuguese",
+      zh: "Chinese",
+      da: "Danish",
+      ru: "Russian",
+      ar: "Arabic",
+      th: "Thai",
+    };
 
     function resetFiltersToDefault() {
     setPage(0);
@@ -70,24 +81,14 @@ export default function ContentManager() {
           setPage={setPage}
           posterUrl={posterUrl}
           resetFiltersToDefault={resetFiltersToDefault}
+          languageMap={languageMap}
         />
 
         {toggleShowInsertMovie ? (
-          <div className="show-modal-insert-new-movie">
-            <h1>ciaoooo</h1>
-
-            <div className="modal-filter-button">
-              <button className="modal-filter-button-filter">
-                <i className="fa-solid fa-magnifying-glass"></i> Filter
-              </button>
-              <button
-                onClick={() => setToggleShowInsertMovie((prev) => !prev)}
-                className="modal-filter-button-close"
-              >
-                <i className="fa-solid fa-xmark"></i> Close
-              </button>
-            </div>
-          </div>
+          <AddMovie 
+          setToggleShowInsertMovie={setToggleShowInsertMovie}
+          posterUrl={posterUrl} 
+          languageMap={languageMap} />
         ) : null}
       </div>
     </div>

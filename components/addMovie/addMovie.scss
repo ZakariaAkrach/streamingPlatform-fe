@@ -1,0 +1,129 @@
+.show-modal-insert-new-movie {
+  background-color: #f8f9fa;
+  border: 2px solid #5a5a5a;
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 95%;
+  overflow-y: auto;
+  padding: 20px;
+}
+.show-modal-table-filters {
+  display: flex;
+  justify-content: space-between;
+}
+.insert-movie-type-language {
+  display: flex;
+  gap: 20px;
+}
+
+.fa-check {
+  color: rgb(5, 165, 5);
+  font-size: 1.3rem;
+}
+
+.information {
+  font-style: italic;
+  color: #555555;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-left: 4px solid #007bff;
+  margin-top: 20px;
+}
+.rounded-button-refresh {
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 12px;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+.model-insert-content-table th:nth-child(1),
+.model-insert-content-table td:nth-child(1) {
+  width: 10%; /* Movie Title */
+  padding-left: 5px;
+}
+
+.model-insert-content-table th:nth-child(2),
+.model-insert-content-table td:nth-child(2) {
+  width: 5%; /* Language */
+}
+
+.model-insert-content-table th:nth-child(3),
+.model-insert-content-table td:nth-child(3) {
+  width: 7%; /* Release Date */
+}
+
+.model-insert-content-table th:nth-child(4),
+.model-insert-content-table td:nth-child(4) {
+  width: 1%; /* Actions */
+}
+.model-insert-content-table tr:nth-child(even) {
+  background-color: #e5ebe5;
+}
+.model-insert-content-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.model-insert-content-table {
+  margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+  .show-modal-insert-new-movie {
+    width: 95%;
+    height: 90%;
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+
+  .show-modal-table-filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .insert-movie-type-language {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .information {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    margin-top: 15px;
+  }
+
+  .rounded-button-refresh {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .model-insert-content-table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+    font-size: 0.85rem;
+  }
+
+  .model-insert-content-table th,
+  .model-insert-content-table td {
+    padding: 8px;
+    white-space: nowrap;
+  }
+
+  .model-insert-content-table th:nth-child(1),
+  .model-insert-content-table td:nth-child(1),
+  .model-insert-content-table th:nth-child(2),
+  .model-insert-content-table td:nth-child(2),
+  .model-insert-content-table th:nth-child(3),
+  .model-insert-content-table td:nth-child(3),
+  .model-insert-content-table th:nth-child(4),
+  .model-insert-content-table td:nth-child(4) {
+    width: auto;
+  }
+}

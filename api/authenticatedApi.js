@@ -23,3 +23,10 @@ export const safePUT = async (url, data, config = {}) => {
   }
   return api.put(url, data, config);
 };
+
+export const safeDelete = async (url, data, config = {}) => {
+  if (!isAuthenticated()) {
+    return Promise.reject("No token found")
+  }
+  return api.delete(url, data, config);
+};

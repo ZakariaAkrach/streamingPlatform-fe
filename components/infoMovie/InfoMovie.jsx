@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { safePOST, safePUT } from "../../api/authenticatedApi";
 import "./infoMovie.scss";
@@ -6,20 +6,20 @@ import api from "../../api/axiosConfig";
 export default function InfoMovie({ posterUrl, state, isLogged }) {
   const [isFavorite, setIsFavorite] = useState();
   const [isLiked, setIsLiked] = useState();
+  const navigate = useNavigate();
 
   function handleFavorite() {
-    if (isLogged) {
-      safePUT("/movie/favorite", {
-        movieId: state.data.id,
-        favorite: !isFavorite,
+    handleRedirectLogin();
+    safePUT("/movie/favorite", {
+      movieId: state.data.id,
+      favorite: !isFavorite,
+    })
+      .then((response) => {
+        setIsFavorite(response.data.data.favorite);
       })
-        .then((response) => {
-          setIsFavorite(response.data.data.favorite);
-        })
-        .catch((error) => {
-          console.log("Error while adding like to the comment ", error);
-        });
-    }
+      .catch((error) => {
+        console.log("Error while adding like to the comment ", error);
+      });
   }
 
   useEffect(() => {
@@ -51,16 +51,29 @@ export default function InfoMovie({ posterUrl, state, isLogged }) {
       <>
         {genresArray.map((genre) => {
           return (
-            <Link key={genre} className="detail-page-info-genres-link">
+            <a onClick={() => alert("I plan to implement it")} key={genre} to="." className="detail-page-info-genres-link">
               {genre}
-            </Link>
+            </a>
           );
         })}
       </>
     );
   }
 
+  function handleRedirectLogin() {
+    if (!isLogged) {
+      alert("Redirect to login page");
+      navigate("/login", {
+        state: {
+          redirectToContentDetailUrl: `/content-detail/${state.data.id}`,
+          redirectData: state.data,
+        },
+      });
+    }
+  }
+
   function handleLikeMovie(isLiked) {
+    handleRedirectLogin();
     safePUT("/movie/like", {
       movieId: state.data.id,
       liked: isLiked,
@@ -98,7 +111,10 @@ export default function InfoMovie({ posterUrl, state, isLogged }) {
         <div className="detail-page-wrapper-links">{getGenres()}</div>
 
         <div className="detail-page-wrapper-button">
-          <div className="detail-page-wrapper-button-circle">
+          <div
+            className="detail-page-wrapper-button-circle"
+            onClick={handleRedirectLogin}
+          >
             <i className="fa-solid fa-circle-play"></i>
           </div>
           <div

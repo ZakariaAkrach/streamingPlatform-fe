@@ -25,7 +25,7 @@ export default function DetailPage() {
 
     return movieCastArray.map((movieCast) => {
       return (
-        <div key={movieCast.id} className="cast-card">
+        <div onClick={() => alert("I plan to implement it")} key={movieCast.id} className="cast-card">
           <div className="cast-card-wrapper">
             <div className="cast-card-img">
               <img

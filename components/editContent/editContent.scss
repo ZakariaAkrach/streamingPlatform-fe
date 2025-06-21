@@ -1,0 +1,105 @@
+.edit-content {
+  width: 90%;
+  margin: 2rem auto;
+  padding: 1.5rem;
+}
+
+.edit-content > p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.edit-content-single-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-content-single-form label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.edit-content-single-form input[type="text"],
+.edit-content-single-form input[type="date"],
+.edit-content-single-form input[type="number"],
+.edit-content-single-form select,
+.edit-content-single-form textarea {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.25s ease;
+  font-family: inherit;
+}
+
+.edit-content-single-form input[type="text"]:focus,
+.edit-content-single-form input[type="date"]:focus,
+.edit-content-single-form input[type="number"]:focus,
+.edit-content-single-form select:focus,
+.edit-content-single-form textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.edit-content-single-form input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.5rem;
+  align-self: start;
+}
+
+.edit-content-single-form label[for="active"] {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+button[type="submit"]:hover {
+  background-color: #357abd;
+}
+
+.edit-content-return {
+  padding: 0.50rem 1rem;
+  font-size: 1rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .edit-content {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    text-align: center;
+  }
+}

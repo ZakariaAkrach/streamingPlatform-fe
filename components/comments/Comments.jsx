@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { safePOST } from "../../api/authenticatedApi";
+import { safePOST, safeDelete } from "../../api/authenticatedApi";
 import "./comments.scss";
 
 export default function Comments(params) {
@@ -7,7 +7,6 @@ export default function Comments(params) {
   const [commentRowPost, setCommentRowPost] = useState();
 
   function detailComment(prev, parent) {
-    console.log(prev);
     return (
       <div className={`comment-user-photo-info ${parent ? "parent" : "son"}`}>
         <div className="comment-user-photo">
@@ -61,9 +60,11 @@ export default function Comments(params) {
               <p>{prev.dislike > 0 ? prev.dislike : null}</p>
             </div>
 
-            <div className="comment-user-action-more" onClick={() => handleMoreAction()}>
-              <i className="fa-solid fa-ellipsis"></i>
-              <p>More</p>
+            <div
+              className="comment-user-action-delete"
+              onClick={() => handleDelete(prev.id)}
+            >
+              <i className="fa-solid fa-trash"></i>
             </div>
           </div>
           {replyingToId === prev.id ? showReply(prev.id) : null}
@@ -72,8 +73,14 @@ export default function Comments(params) {
     );
   }
 
-  function handleMoreAction() {
-    alert("In future i shuld add some operation but for now is just an extra feature")
+  function handleDelete(idComment) {
+    safeDelete(`/comments/delete/${idComment}`)
+      .then((response) => {
+        params.setRefresh((prev) => prev + 1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function showComment() {
@@ -118,6 +125,7 @@ export default function Comments(params) {
         movieId: params.movieId,
       })
         .then((response) => {
+          params.setRefresh((prev) => prev + 1);
           console.log("Add comment ", response);
         })
         .catch((error) => {
@@ -146,5 +154,5 @@ export default function Comments(params) {
     );
   }
 
-  return showComment();
+  return <>{showComment()}</>;
 }

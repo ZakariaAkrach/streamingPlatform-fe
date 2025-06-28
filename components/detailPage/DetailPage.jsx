@@ -13,6 +13,7 @@ export default function DetailPage() {
   const [commentPost, setCommentPost] = useState("");
   const [userComments, setUserComments] = useState([]);
   const { isLogged, setIsLogged } = useContext(LoginContext);
+  const [refresh, setRefresh] = useState(0);
   const navigate = useNavigate();
   const posterUrl = "https://image.tmdb.org/t/p/original/";
   const imgCastUrl = "https://image.tmdb.org/t/p/w500/";
@@ -25,7 +26,11 @@ export default function DetailPage() {
 
     return movieCastArray.map((movieCast) => {
       return (
-        <div onClick={() => alert("I plan to implement it")} key={movieCast.id} className="cast-card">
+        <div
+          onClick={() => alert("I plan to implement it")}
+          key={movieCast.id}
+          className="cast-card"
+        >
           <div className="cast-card-wrapper">
             <div className="cast-card-img">
               <img
@@ -65,7 +70,7 @@ export default function DetailPage() {
         movieId: state.data.id,
       })
         .then((response) => {
-          alert("Comment added");
+          setRefresh((prev) => prev + 1);
         })
         .catch((error) => {
           console.log("Error while adding comment ", error);
@@ -73,7 +78,12 @@ export default function DetailPage() {
 
       setCommentPost("");
     } else {
-      navigate("/login", { state: { redirectToContentDetailUrl: `/content-detail/${state.data.id}`, redirectData: state.data } });
+      navigate("/login", {
+        state: {
+          redirectToContentDetailUrl: `/content-detail/${state.data.id}`,
+          redirectData: state.data,
+        },
+      });
     }
   }
 
@@ -111,7 +121,7 @@ export default function DetailPage() {
       .catch((error) => {
         console.log("get-all-by-content error: " + error);
       });
-  }, [state.data.id]);
+  }, [state.data.id, refresh]);
 
   return (
     <div className="detail-page-container">
@@ -171,6 +181,8 @@ export default function DetailPage() {
                   isLogged={isLogged}
                   handCommentLike={handCommentLike}
                   movieId={state.data.id}
+                  refresh={refresh}
+                  setRefresh={setRefresh}
                 />
               }
             </div>

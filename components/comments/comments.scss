@@ -18,10 +18,9 @@
   gap: 5px;
   align-items: baseline;
 }
-.comment-user-action-more {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
+.comment-user-action-delete:hover {
+  cursor: pointer;
+  color: red;
 }
 .comment-user-info-name,
 .comment-user-info-date {

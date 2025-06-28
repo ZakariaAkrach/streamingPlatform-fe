@@ -40,6 +40,7 @@ export default function Login() {
         if (res.data.token !== null) {
           setLoginFailed(false);
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("role", res.data.role);
           setIsLogged(true);
           setResponseLogin(res.data.message);
 

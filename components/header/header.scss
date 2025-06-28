@@ -24,6 +24,11 @@
     width: 90%;
 }
 
+.dashboard-log-out {
+    display: flex;
+    gap: 10px;
+}
+
 @media (max-width: 768px) {
     .button-log-in{
         margin-top: 20px;

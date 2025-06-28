@@ -15,6 +15,23 @@ export default function Header() {
     setIsLogged(false);
   }
 
+  function handleDashboard() {
+    var role = localStorage.getItem("role");
+
+    if (role === "USER") {
+      navigate("/user-dasheboard");
+      return;
+    }
+
+    if (role === "ADMIN") {
+    }
+
+    if (role === "CONTENT_MANAGER") {
+      navigate("/content-manager");
+      return;
+    }
+  }
+
   const buttonLoginStyle = {
     backgroundColor: "#1e90ff",
     color: "white",
@@ -67,14 +84,24 @@ export default function Header() {
               </button>
             </Link>
           ) : (
-            <button
-              onClick={handleLogOut}
-              type="button"
-              className="btn"
-              style={buttonLoginStyle}
-            >
-              Log Out
-            </button>
+            <div className="dashboard-log-out">
+              <button
+                onClick={handleDashboard}
+                type="button"
+                className="btn"
+                style={buttonLoginStyle}
+              >
+                Dashboard
+              </button>
+              <button
+                onClick={handleLogOut}
+                type="button"
+                className="btn"
+                style={buttonLoginStyle}
+              >
+                Log Out
+              </button>
+            </div>
           )}
         </div>
       </div>

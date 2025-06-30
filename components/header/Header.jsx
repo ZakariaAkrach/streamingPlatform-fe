@@ -10,7 +10,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   function handleLogOut() {
-    api.post("http://localhost:8080/logout");
+    api.post("https://streamingplatform-be.onrender.com:8080/logout");
     localStorage.removeItem("token");
     setIsLogged(false);
   }

@@ -45,7 +45,7 @@ export default function UserDasheboard() {
 
   function populateSingleComment() {
     const cards = [];
-    for (let i = 0; i < commentData.length; i++) {
+    for (let i = 0; i < commentData?.length; i++) {
       const comment = commentData[i];
       cards.push(
         <div className="user-dashboard-comment" key={comment.id}>
@@ -65,7 +65,7 @@ export default function UserDasheboard() {
         </div>
       );
     }
-    return cards.length > 0 ? cards : <p>No favorite movies found</p>;
+    return cards.length > 0 ? cards : <p>No comment movies found</p>;
   }
 
   function handleRedirectLogin() {

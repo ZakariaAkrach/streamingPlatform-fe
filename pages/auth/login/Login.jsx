@@ -57,6 +57,8 @@ export default function Login() {
           }
 
           if (res.data.role === "ADMIN") {
+            navigate("/admin-dasheboard");
+            return;
           }
 
           if (res.data.role === "CONTENT_MANAGER") {

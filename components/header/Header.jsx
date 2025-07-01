@@ -24,6 +24,8 @@ export default function Header() {
     }
 
     if (role === "ADMIN") {
+      navigate("/admin-dasheboard");
+      return;
     }
 
     if (role === "CONTENT_MANAGER") {

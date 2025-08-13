@@ -1,0 +1,233 @@
+.admin-dashboard-wrapper {
+  width: 90%;
+  margin: auto;
+}
+.admin-dashboard-container-bar {
+  width: 50%;
+  margin-bottom: 3rem;
+}
+.admin-dashboard-bar-filter {
+  display: flex;
+  gap: 3rem;
+  align-items: start;
+}
+.admin-ddashboard-bar-filter-top-number {
+  display: flex;
+  align-items: start;
+  gap: 5px;
+}
+#topNumber {
+  width: 2.5rem;
+}
+.admin-dashboard-table-user > table {
+  width: 100%;
+}
+
+th,
+td {
+  font-size: 1rem;
+  height: 60px;
+  padding: 0.5rem 2rem;
+}
+th {
+  background-color: #f2f2f2;
+  height: 80px;
+}
+td {
+  height: 80px;
+}
+
+
+
+.admin-dashboard-table-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.admin-dashboard-table-title-actions {
+  display: flex;
+  justify-content: space-between;
+}
+.admin-dashboard-table-actions {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+.admin-dashboard-table-actions > div {
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 12px;
+  padding: 5px 15px 5px 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.admin-dashboard-table-actions-filter,
+.admin-dashboard-table-actions-add-new-user {
+  display: flex;
+  gap: 5px;
+}
+
+.admin-dashboard-table-single-filter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.admin-dashboard-select > select {
+  min-width: 50px;
+  border-radius: 12px;
+  padding: 3px;
+}
+.admin-dashboard-table-single-filter-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+  border: 1px solid rgb(182, 182, 182);
+  background-color: white;
+  margin-right: 20px;
+  height: 35px;
+  border-radius: 5px;
+}
+.admin-dashboard-table-single-filter-search > input {
+  border: none;
+  outline: none;
+  background-color: white;
+  width: 90%;
+}
+.admin-dashboard-table-single-filter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.admin-dashboard-table-single-filter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+//Toggle
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-left: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+//end toggle
+
+.admin-dashboard-table-disable {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.admin-dashboard-table-disable:hover {
+  background-color: #c82333;
+}
+
+.admin-dashboard-table-enable {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.admin-dashboard-table-enable:hover {
+  background-color: #43a047;
+}
+
+//form
+.admin-dashboard-form {
+  width: 40%;
+  margin-bottom: 1rem;
+}
+.admin-dashboard-form-content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper-password-show{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.blue{
+  background-color: #4a90e2;
+}
+
+
+@media (max-width: 768px) {
+  .admin-dashboard-table-title-actions {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .admin-dashboard-table-actions {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .admin-dashboard-table-actions > div {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  .admin-dashboard-table-single-filter-search {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .admin-dashboard-table-single-filter-search > input {
+    width: 100%;
+    font-size: 14px;
+  }
+}

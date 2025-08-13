@@ -74,7 +74,7 @@ export default function Login() {
 
   function loginGoogle() {
     localStorage.removeItem("token");
-    window.location.href = "http://192.168.1.19:8080/oauth2/authorization/google";
+    window.location.href = "http://192.168.1.11:8080/oauth2/authorization/google";
     //window.location.href = "https://streamingplatform-be.onrender.com/oauth2/authorization/google"
   }
 

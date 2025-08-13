@@ -20,6 +20,7 @@ import OAuth2RedirectHandler from "./components/ouath2Redirect/OAuth2RedirectHan
 import ContentManager from "./pages/dashboard/contentManager/ContentManager";
 import DetailPage from "./components/detailPage/DetailPage";
 import EditContent from "./components/editContent/EditContent";
+import AdminDasheboard from "./pages/dashboard/admin/AdminDasheboard";
 
 const root = createRoot(document.getElementById("root"));
 
@@ -53,6 +54,15 @@ const router = createBrowserRouter(
         element={
           <ProtectedRoute>
             <ContentManager />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="admin-dasheboard"
+        element={
+          <ProtectedRoute>
+            <AdminDasheboard />
           </ProtectedRoute>
         }
       />

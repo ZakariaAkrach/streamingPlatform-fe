@@ -57,6 +57,8 @@ export default function Login() {
           }
 
           if (res.data.role === "ADMIN") {
+            navigate("/admin-dasheboard");
+            return;
           }
 
           if (res.data.role === "CONTENT_MANAGER") {
@@ -72,8 +74,8 @@ export default function Login() {
 
   function loginGoogle() {
     localStorage.removeItem("token");
-    //window.location.href = "http://192.168.1.19:8080/oauth2/authorization/google";
-    window.location.href = "https://streamingplatform-be.onrender.com/oauth2/authorization/google"
+    window.location.href = "http://192.168.1.11:8080/oauth2/authorization/google";
+    //window.location.href = "https://streamingplatform-be.onrender.com/oauth2/authorization/google"
   }
 
   return (

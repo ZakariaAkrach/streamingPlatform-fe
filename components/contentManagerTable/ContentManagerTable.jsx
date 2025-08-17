@@ -13,7 +13,6 @@ export default function ContentManagerTable(params) {
   function handleDelete(id) {
     safeDelete(`/content-manager/delete/${id}`)
       .then((response) => {
-        console.log(response);
         alert("movie deleted successfully");
 
         params.setAllMovie((prev) => ({

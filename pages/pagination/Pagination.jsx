@@ -53,7 +53,6 @@ export default function Pagination() {
       .get(url)
       .then((response) => {
         setAllContent(response.data.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(

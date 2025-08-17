@@ -137,7 +137,6 @@ export default function AdminDasheboard() {
       `/admin-dashboard/change-users-status/${id}?userStatus=${userStatus}`
     )
       .then((response) => {
-        console.log(response);
         setRefreshPage((prev) => prev + 1);
       })
       .catch((error) => {

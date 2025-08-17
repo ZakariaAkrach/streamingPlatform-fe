@@ -115,7 +115,6 @@ export default function UserDasheboard() {
   useEffect(() => {
     safeGET("/user-dashboard/get-all-favorite")
       .then((response) => {
-        console.log(response);
         setFavoriteMovieData(response.data.data);
       })
       .catch((error) => {
@@ -130,7 +129,6 @@ export default function UserDasheboard() {
 
     safeGET("/user-dashboard/get-all-comment")
       .then((response) => {
-        console.log(response);
         setCommentData(response.data.data);
       })
       .catch((error) => {

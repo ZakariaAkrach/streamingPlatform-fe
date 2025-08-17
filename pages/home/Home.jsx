@@ -12,7 +12,6 @@ export default function Home() {
       .get("/movie/get-trending-movie")
       .then((res) => {
         if (res.data.status === 200) {
-          console.log(res.data);
           setTrendingMovieData(res.data.data);
         }
       })

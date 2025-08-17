@@ -19,7 +19,6 @@ export default function AddMovie(params) {
       `/content-manager/get-movie-from-the-movie-db?typeMovie=${typeMovie}&language=${searchByLanguage}`
     )
       .then((response) => {
-        console.log(response);
         setAllMovieTheMovieDb(response);
       })
       .catch((error) => {
@@ -38,7 +37,6 @@ export default function AddMovie(params) {
       `/content-manager/add-movie-from-the-movie-db-id?id=${id}&typeMovie=${typeMovie}`
     )
       .then((response) => {
-        console.log(response);
         setTheMovieDBIdAddedFromBE((prev) => [...prev, id]);
       })
       .catch((error) => {

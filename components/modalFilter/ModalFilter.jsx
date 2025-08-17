@@ -3,6 +3,21 @@ import RadioItem from "../RadioItem/RadioItem";
 import "./modalFilter.scss";
 
 export default function ModalFilter(props) {
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const typeContent = formData.get("type");
+    const genres = formData.getAll("genres");
+    const language = formData.getAll("language");
+    console.log(language)
+
+    props.handleChangeContent(typeContent);
+    props.handleChangeGenres(genres);
+    props.handleChangeLanguage(language);
+  }
+
   return (
     <div
       className={`modal-filter ${
@@ -13,92 +28,79 @@ export default function ModalFilter(props) {
 
       <div className="modal-filter-separator" />
 
-      <div className="modal-filter-type-quality">
-        <div className="modal-filter-type">
-          <h3>Type</h3>
-          <ul>
-            <RadioItem name="type" id="all-type" value="all" />
-            <RadioItem name="type" id="movies" value="movies" />
-            <RadioItem name="type" id="tv-show" value="tv show" />
-          </ul>
+      <form onSubmit={handleSubmit}>
+        <div className="modal-filter-type-quality">
+          <div className="modal-filter-type">
+            <h3>Type</h3>
+            <ul>
+              <RadioItem name="type" id="movies" value="MOVIE" defaultChecked  />
+              <RadioItem name="type" id="tv-show" value="TV_SHOW" />
+            </ul>
+          </div>
         </div>
 
-        <div className="modal-filter-quality">
-          <h3>Quality</h3>
-          <ul>
-            <RadioItem name="quality" id="all-quality" value="all" />
-            <RadioItem name="quality" id="hd" value="hd" />
-            <RadioItem name="quality" id="sd" value="sd" />
-            <RadioItem name="quality" id="cam" value="cam" />
-          </ul>
+        <div className="modal-filter-separator" />
+
+        <div className="modal-filter-genre">
+          <h3>Genre:</h3>
+          <div className="modal-filter-genres-checkbox">
+            <ul>
+              <CheckboxItem name="genres" id="action" value="action" />
+              <CheckboxItem name="genres" id="adventure" value="adventure" />
+              <CheckboxItem name="genres" id="biography" value="biography" />
+              <CheckboxItem name="genres" id="fantasy" value="fantasy" />
+              <CheckboxItem name="genres" id="drama" value="drama" />
+              <CheckboxItem name="genres" id="kids" value="kids" />
+              <CheckboxItem name="genres" id="mistery" value="mistery" />
+              <CheckboxItem name="genres" id="history" value="history" />
+              <CheckboxItem name="genres" id="reality" value="reality" />
+              <CheckboxItem name="genres" id="war" value="war" />
+              <CheckboxItem name="genres" id="horror" value="horror" />
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div className="modal-filter-separator" />
+        <div className="modal-filter-separator" />
 
-      <div className="modal-filter-released">
-        <h3>Released:</h3>
-        <ul>
-          <RadioItem name="released" id="all-released" value="all" />
-          <RadioItem name="released" id="2025" value="2025" />
-          <RadioItem name="released" id="2024" value="2024" />
-          <RadioItem name="released" id="2023" value="2023" />
-          <RadioItem name="released" id="2022" value="2022" />
-          <RadioItem name="released" id="2021" value="2021" />
-          <RadioItem name="released" id="older" value="older" />
-        </ul>
-      </div>
-
-      <div className="modal-filter-separator" />
-
-      <div className="modal-filter-genre">
-        <h3>Genre:</h3>
-        <div className="modal-filter-genres-checkbox">
-          <ul>
-            <CheckboxItem name="action" id="action" />
-            <CheckboxItem name="adventure" id="adventure" />
-            <CheckboxItem name="biography" id="biography" />
-            <CheckboxItem name="fantasy" id="fantasy" />
-            <CheckboxItem name="drama" id="drama" />
-            <CheckboxItem name="kids" id="kids" />
-            <CheckboxItem name="mistery" id="mistery" />
-            <CheckboxItem name="history" id="history" />
-            <CheckboxItem name="reality" id="reality" />
-            <CheckboxItem name="war" id="war" />
-            <CheckboxItem name="horror" id="horror" />
-          </ul>
+        <div className="modal-filter-language">
+          <h3>Languages:</h3>
+          <div className="modal-filter-language-checkbox">
+            <ul>
+              <CheckboxItem name="language" id="argentina" value="es" />
+              <CheckboxItem name="language" id="australia" value="en" />
+              <CheckboxItem name="language" id="belgium" value="nl" />
+              <CheckboxItem name="language" id="belgium-fr" value="fr" />
+              <CheckboxItem name="language" id="belgium-de" value="de" />
+              <CheckboxItem name="language" id="brazil" value="pt" />
+              <CheckboxItem name="language" id="canada" value="en" />
+              <CheckboxItem name="language" id="canada-fr" value="fr" />
+              <CheckboxItem name="language" id="china" value="zh" />
+              <CheckboxItem name="language" id="denmark" value="da" />
+              <CheckboxItem name="language" id="russia" value="ru" />
+              <CheckboxItem name="language" id="morocco" value="fr" />
+              <CheckboxItem name="language" id="morocco-ar" value="ar" />
+              <CheckboxItem name="language" id="thailand" value="th" />
+              <CheckboxItem name="language" id="usa" value="en" />
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div className="modal-filter-separator" />
-
-      <div className="modal-filter-language">
-        <h3>Languages:</h3>
-        <div className="modal-filter-language-checkbox">
-          <ul>
-            <CheckboxItem name="argentina" id="argentina" />
-            <CheckboxItem name="australia" id="australia" />
-            <CheckboxItem name="belgium" id="belgium" />
-            <CheckboxItem name="brazil" id="brazil" />
-            <CheckboxItem name="canada" id="canada" />
-            <CheckboxItem name="china" id="china" />
-            <CheckboxItem name="denmark" id="denmark" />
-            <CheckboxItem name="russia" id="russia" />
-            <CheckboxItem name="morocco" id="morocco" />
-            <CheckboxItem name="thailand" id="thailand" />
-            <CheckboxItem name="usa" id="usa" />
-          </ul>
+        <div className="modal-filter-button">
+          <button
+            type="submit"
+            className="modal-filter-button-filter"
+            onClick={props.handleToggleModalFilter}
+          >
+            <i className="fa-solid fa-magnifying-glass"></i> Filter
+          </button>
         </div>
-      </div>
-
-      <div className="modal-filter-button">
-        <button className="modal-filter-button-filter">
-          <i className="fa-solid fa-magnifying-glass"></i> Filter
-        </button>
-        <button onClick={props.handleToggleModalFilter} className="modal-filter-button-close">
-          <i className="fa-solid fa-xmark"></i> Close
-        </button>
-      </div>
+      </form>
+      <button
+        onClick={props.handleToggleModalFilter}
+        className="modal-filter-button-close"
+      >
+        <i className="fa-solid fa-xmark"></i> Close
+      </button>
     </div>
   );
 }

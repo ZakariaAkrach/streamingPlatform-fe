@@ -22,17 +22,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link onClick={() => window.scrollTo(0,0)} className="footer-nav-link-tag" to="tv-show">
-                Tv Show
-              </Link>
-            </li>
-            <li>
-              <Link className="footer-nav-link-tag" to="">
-                Movie
-              </Link>
-            </li>
-            <li>
-              <Link className="footer-nav-link-tag" to="">
+              <Link className="footer-nav-link-tag" to="tv-show">
                 Archive
               </Link>
             </li>

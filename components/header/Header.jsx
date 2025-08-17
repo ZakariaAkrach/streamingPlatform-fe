@@ -60,16 +60,6 @@ export default function Header() {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link className="nav-link" to="tv-show">
-              Tv Show
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="tv-show">
-              Movie
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="content-manager">
               Archive
             </Link>
           </li>

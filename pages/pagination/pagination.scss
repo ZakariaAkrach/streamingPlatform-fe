@@ -23,6 +23,11 @@
   justify-content: space-between;
 }
 
+.no-data-present {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .pagination-title {
     font-size: 2rem;

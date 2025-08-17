@@ -16,7 +16,7 @@ export default function SingleCard(params) {
   }, [screenWidth]);
 
   return (
-    <Link className="home-view-single-card-link-wrapper" to={`content-detail/${params.data.id}`} state={{data: params.data}}>
+    <Link className="home-view-single-card-link-wrapper" to={`/content-detail/${params.data.id}`} state={{data: params.data}}>
       <div className="home-view-single-card">
         <div className="poster-rate-title">
           <img src={posterUrl + params.data.posterPath} alt="slider-photo" />

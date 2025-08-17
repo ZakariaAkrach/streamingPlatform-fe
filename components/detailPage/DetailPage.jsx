@@ -18,6 +18,10 @@ export default function DetailPage() {
   const posterUrl = "https://image.tmdb.org/t/p/original/";
   const imgCastUrl = "https://image.tmdb.org/t/p/w500/";
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
   function getCast() {
     const movieCastArray = [];
     for (let i = 0; i < state.data.movieCast.length; i++) {

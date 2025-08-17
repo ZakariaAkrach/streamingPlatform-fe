@@ -14,6 +14,12 @@ export default function OAuth2RedirectHandler() {
     if (token !== null) {
       setIsLogged(true);
       localStorage.setItem("token", token);
+
+      const role = queryParams.get("role");
+      if (role) {
+        localStorage.setItem("role", role);
+      }
+
       navigate("/user-dasheboard");
     } else {
       navigate("/login?error=oauth2");

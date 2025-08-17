@@ -29,7 +29,7 @@ export default function Slider() {
         setId(res.data.data[0].id);
         setData(res.data.data[0])
       });
-  });
+  }, []);
 
   return (
     <section className="home-slider">
